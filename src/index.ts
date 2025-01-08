@@ -24,10 +24,11 @@ redisConnection()
 
 // Connect App
 const server = http.createServer(appConnection);
+const port = process.env.PORT || 4000;
 
 // Connect Server
-server.listen(process.env.PORT, () => {
-  console.log(`Server is listening on http://localhost:${process.env.PORT} on worker service ${process.pid}`)
+server.listen(port, () => {
+  console.log(`Server is listening on http://localhost:${port} on worker service ${process.pid}`)
 });
 
 // Unhandled Promise Rejection
