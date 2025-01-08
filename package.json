@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon --legacy-watch",
+    "build": "tsc",
     "start": "ts-node ./src/index.ts"
   },
   "keywords": [],
