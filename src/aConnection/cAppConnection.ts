@@ -39,8 +39,8 @@ appConnection.use(corsMiddleware({
   origin: process.env.ENVIRONMENT === "Production" ?
     [
       // "https://inventech-001.netlify.app",
-      "https://inventech-f4a59.web.app/",
-      "https://inventech-f4a59.firebaseapp.com/"
+      "https://inventech-f4a59.web.app",
+      "https://inventech-f4a59.firebaseapp.com"
     ] :
     [
       "http://localhost:5173",
