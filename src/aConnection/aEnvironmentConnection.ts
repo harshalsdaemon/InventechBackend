@@ -1,8 +1,7 @@
 import dotenv from 'dotenv'
 
-
 const environmentConnection = () => {
-  dotenv.config({ path: ".env" })
+  dotenv.config()
 }
 
 export default environmentConnection;
