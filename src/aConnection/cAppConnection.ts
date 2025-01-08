@@ -73,6 +73,11 @@ appConnection.use("/api/v1/factor/", factorRouter);
 
 appConnection.use('/api/v1/single-image/', singleImageRouter);
 
+// Default request handler
+appConnection.get("/", (req, res) => {
+  res.send("Welcome to Inventech APIs");
+});
+
 
 // Error Middleware
 appConnection.use(errorMiddleware);
