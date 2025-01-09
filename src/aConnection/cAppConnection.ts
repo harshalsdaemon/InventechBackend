@@ -35,25 +35,24 @@ const appConnection = express();
 
 // Third Party Middleware
 // appConnection.use(morganMiddleware("dev"));
-// appConnection.use(corsMiddleware({
-// origin: process.env.ENVIRONMENT === "Production" ?
-//   [
-//     // "https://inventech-001.netlify.app",
-//     "https://inventech-f4a59.web.app",
-//     "https://inventech-f4a59.firebaseapp.com"
-//   ] :
-//   [
-//     "http://localhost:5173",
-//     "http://localhost:5174",
-//   ], credentials: true
-// }));
+appConnection.use(corsMiddleware({
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: process.env.ENVIRONMENT === "Production" ?
+    [
+      "https://inventech-f4a59.web.app",
+    ] :
+    [
+      "http://localhost:5173",
+      "http://localhost:5174",
+    ], credentials: true
+}));
 
 // Allow requests from your frontend origin
-appConnection.use(corsMiddleware({
-  origin: 'https://inventech-f4a59.web.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+// appConnection.use(corsMiddleware({
+//   origin: 'https://inventech-f4a59.web.app',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   credentials: true
+// }));
 
 appConnection.use(bodyParserMiddleware.urlencoded({ extended: true }));
 appConnection.use(bodyParserMiddleware.json());
