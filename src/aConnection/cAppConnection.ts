@@ -34,7 +34,7 @@ import { singleImageRouter } from '../bLove/aMCR/cRoute/zFreestyleSample/aSingle
 const appConnection = express();
 
 // Third Party Middleware
-appConnection.use(morganMiddleware("dev"));
+// appConnection.use(morganMiddleware("dev"));
 appConnection.use(corsMiddleware({
   origin: [
     "https://inventech-f4a59.web.app",
