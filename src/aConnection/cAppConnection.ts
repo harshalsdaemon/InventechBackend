@@ -50,7 +50,7 @@ const appConnection = express();
 
 // Allow requests from your frontend origin
 appConnection.use(corsMiddleware({
-  origin: '*',
+  origin: 'https://inventech-f4a59.web.app/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
