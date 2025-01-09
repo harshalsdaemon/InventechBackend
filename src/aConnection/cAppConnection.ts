@@ -35,11 +35,7 @@ const appConnection = express();
 
 // Third Party Middleware
 // appConnection.use(morganMiddleware("dev"));
-appConnection.use(corsMiddleware({
-  origin: [
-    "https://inventech-f4a59.web.app",
-    "https://inventech-f4a59.firebaseapp.com"
-  ], credentials: true
+// appConnection.use(corsMiddleware({
   // origin: process.env.ENVIRONMENT === "Production" ?
   //   [
   //     // "https://inventech-001.netlify.app",
@@ -50,7 +46,15 @@ appConnection.use(corsMiddleware({
   //     "http://localhost:5173",
   //     "http://localhost:5174",
   //   ], credentials: true
+// }));
+
+// Allow requests from your frontend origin
+appConnection.use(corsMiddleware({
+  origin: 'https://inventech-f4a59.web.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true // if you need to include cookies in requests
 }));
+
 appConnection.use(bodyParserMiddleware.urlencoded({ extended: true }));
 appConnection.use(bodyParserMiddleware.json());
 appConnection.use(cookieParserMiddleware());
