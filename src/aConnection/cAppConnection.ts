@@ -35,24 +35,37 @@ const appConnection = express();
 
 // Third Party Middleware
 // appConnection.use(morganMiddleware("dev"));
-appConnection.use(corsMiddleware({
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  origin: process.env.ENVIRONMENT === "Production" ?
-    [
-      "https://inventech-f4a59.web.app",
-    ] :
-    [
-      "http://localhost:5173",
-      "http://localhost:5174",
-    ], credentials: true
-}));
-
-// Allow requests from your frontend origin
 // appConnection.use(corsMiddleware({
-//   origin: 'https://inventech-f4a59.web.app',
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   credentials: true
+//   origin: process.env.ENVIRONMENT === "Production" ?
+//     [
+//       "https://inventech-f4a59.web.app",
+//     ] :
+//     [
+//       "http://localhost:5173",
+//       "http://localhost:5174",
+//     ], credentials: true
 // }));
+
+// CORS Configuration
+const allowedOrigins = [
+  'https://inventech-f4a59.web.app',
+  'https://inventech-f4a59.firebaseapp.com',
+  // Add other allowed origins here
+];
+
+appConnection.use(corsMiddleware({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include OPTIONS
+  credentials: true // Allow credentials
+}));
 
 appConnection.use(bodyParserMiddleware.urlencoded({ extended: true }));
 appConnection.use(bodyParserMiddleware.json());
